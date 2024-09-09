@@ -1,0 +1,41 @@
+CREATE TABLE PRODUCT (
+    ProductID NUMBER PRIMARY KEY,
+    Name VARCHAR2(50) NOT NULL,
+    Price NUMBER(10, 2) NOT NULL,
+    Stock NUMBER DEFAULT 0
+);
+
+
+CREATE TABLE ORDERS (
+    OrderID NUMBER PRIMARY KEY,
+    CustomerID NUMBER NOT NULL,
+    OrderTotal NUMBER(10, 2) NOT NULL,
+    OrderStatus VARCHAR2(20),
+    OrderDate DATE DEFAULT SYSDATE,
+    FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID)
+);
+
+
+CREATE TABLE CUSTOMER (
+    CustomerID NUMBER PRIMARY KEY,
+    FirstName VARCHAR2(50) NOT NULL,
+    LastName VARCHAR2(50) NOT NULL,
+    Email VARCHAR2(100),
+    Phone VARCHAR2(20)
+);
+
+
+CREATE TABLE SUPPLIER (
+    SupplierID NUMBER PRIMARY KEY,
+    Name VARCHAR2(100) NOT NULL,
+    ContactEmail VARCHAR2(100)
+);
+
+
+// Add a column category to Product the Table
+ALTER TABLE PRODUCT
+ADD Category VARCHAR2(20);
+
+//Add a column OrderDate to the ORDERS table with SYSDATE as the default value
+ALTER TABLE ORDERS
+ADD OrderDate DATE DEFAULT SYSDATE;
